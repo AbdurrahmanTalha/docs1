@@ -1,0 +1,343 @@
+---
+title: "Overview"
+description: "Here is a list of different `parameters` you can use with ScrapeAutomate. This overview will help you get started with ScrapeAutomate while ensuring secure usage of your credentials."
+---
+
+### Query Parameters
+
+| Parameter                                                          | Type       | Description                                                                                                                                                                                                     | Required | Default                                                     |
+| ------------------------------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------- |
+| [api_key](#api-key)                                                | `string`   | Your unique API key to authenticate every request.                                                                                                                                                              | `true`   | [Get your API key](https://app.scrapeautomate.com/register) |
+| [url](#url)                                                        | `string`   | The URL of the web page you want to scrape.                                                                                                                                                                     | `true`   |                                                             |
+| [render](#render)                                                  | `boolean`  | Whether to render JavaScript while scraping.                                                                                                                                                                    | `false`  | `false`                                                     |
+| [window_width](/features/rendering#setting-window-width)           | `number`   | The width of the browser window.                                                                                                                                                                                | `false`  | `1920`                                                      |
+| [window_height](/features/rendering#setting-window-height)         | `number`   | The height of the browser window.                                                                                                                                                                               | `false`  | `1080`                                                      |
+| [markdown](/features/output#markdown)                              | `boolean`  | Returns the scraped data in markdown.                                                                                                                                                                           | `false`  | `false`                                                     |
+| [screenshot](/features/output#screenshot)                          | `boolean`  | Returns screenshot of the web page.                                                                                                                                                                             | `false`  | `false`                                                     |
+| [webhook_url](/features/output#webhook)                            | `string`   | Used for setting a webhook where the response will be sent to.                                                                                                                                                  | `false`  |                                                             |
+| [instructions](/features/rendering#instructions)                   | `object[]` | This Allows you to interact with the web page.                                                                                                                                                                  | `false`  |                                                             |
+| [proxy_type](/features/proxy#proxy-type)                           | `string`   | The type of proxy to use while scraping for better anonymity, performance and speed                                                                                                                             | `false`  |                                                             |
+| [proxy_country](/features/proxy#proxy-country)                     | `string`   | The location of the proxy server.                                                                                                                                                                               | `false`  |                                                             |
+| [workflow_id](/features/workflow)                                  | `string`   | Reuse configurations from a saved workflow.                                                                                                                                                                     | `false`  |                                                             |
+| [block_resources](/features/blocking#blocking-resources)           | `boolean`  | Blocks specific web resources (stylesheets, images, media, etc.) during automation using block_resources. Separate multiple resources with "," . Useful for faster scraping and preventing unnecessary loading. | `false`  | `false`                                                     |
+| [block_ads](/features/blocking#blocking-ads)                       | `boolean`  | Whether to block ads while scraping.                                                                                                                                                                            | `false`  | `false`                                                     |
+| [block_chat_widgets](/features/blocking#blocking-chat-widgets)     | `boolean`  | Automatically block chat widgets from appearing in the ui.scraping.                                                                                                                                             | `false`  | `false`                                                     |
+| [block_cookie_banners](/features/blocking#blocking-cookie-banners) | `boolean`  | Automatically block cookie banners from appearing in the ui.scraping.                                                                                                                                           | `false`  | `false`                                                     |
+
+## Getting Started
+
+ScrapeAutomate is one of the easiest scraping tools available on the web.
+
+To get started with scraping, you only need **two** things:
+
+- Your unique `api_key`
+- The `Encoded URL` of the web page you want to scrape.
+
+<Note>
+  You can get your **API key** after creating an account on{" "}
+  [ScrapeAutomate](https://app.scrapeautomate.com/register).
+</Note>
+
+### API Key
+
+Your unique API key is essential to authenticate every API request. After creating and verifying your account on [ScrapeAutomate](https://scrapeautomate.com), your API key will be visible on the builder page as highlighted in the image below.
+
+![API Key Example](/images/api-key.png)
+
+#### Code Example
+
+<CodeGroup>
+
+```shell cURL
+curl --request GET \
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>'
+```
+
+```javascript Node.js
+import axios from "axios";
+
+const response = await axios.get(
+  "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>"
+);
+```
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+```
+
+```python Python
+import requests
+
+response = requests.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>')
+```
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);
+```
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}
+```
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken> HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*
+```
+
+</CodeGroup>
+
+<Warning>
+  Do not share your **API key** with anyone. Sharing your API key can lead to
+  **unauthorized access, unexpected charges, and potential security
+  vulnerabilities**.
+</Warning>
+
+### URL
+
+You must provide an `encoded-URL` to use ScrapeAutomate API. Encoding ensures that the URL is processed correctly by the API and that special characters (like spaces, question marks, and ampersands) do not cause issues.
+
+You can use websites like [urlencoder](https://www.urlencoder.org/) to easily encode your URLs.
+
+![URL Example](/images/url-encoder.png)
+
+After encoding the URL, pass it in the query parameter named `url` as shown below:
+
+<CodeGroup>
+
+```shell cURL
+curl --request GET \
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com'
+```
+
+```javascript Node.js
+import axios from "axios";
+
+const response = await axios.get(
+  "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com"
+);
+```
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+```
+
+```python Python
+import requests
+
+response = requests.get('https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com')
+```
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);
+```
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}
+```
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&url=https%3A%2F%2Fexample.com HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*
+```
+
+</CodeGroup>
+
+<Note>
+  The `url` parameter and `api_key` are both required. If any of these
+  parameters are missing, your request won't be processed.
+</Note>
+
+### Render
+
+The **render** parameter is a boolean value that determines whether ScrapeAutomate should render javascript while scraping. Setting render to `true` enables features like taking screenshots, blocking specific resources, form-filling, and clicking elements.
+
+<CodeGroup>
+
+```shell cURL
+curl --request GET \
+    --url 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com'
+```
+
+```javascript Node.js
+import axios from "axios";
+
+const response = await axios.get(
+  "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com"
+);
+```
+
+```java Java
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com"))
+    .GET()
+    .build();
+
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com',
+)
+```
+
+```php PHP
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+$response = curl_exec($ch);
+
+curl_close($ch);
+```
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+)
+
+func main() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://app.scrapeautomate.com/api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", bodyText)
+}
+```
+
+```http HTTP
+GET /api/scraper?api_key=<exampleToken>&render=true&url=https%3A%2F%2Fexample.com HTTP/1.1
+Host: app.scrapeautomate.com
+User-Agent: curl/8.2.1
+Accept: */*
+```
+
+</CodeGroup>
+
+<Info>
+  By default, the **render** parameter is set to `false`. Note that launching a
+  browser consumes more ten times more credits.
+</Info>

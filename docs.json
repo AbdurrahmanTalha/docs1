@@ -1,0 +1,78 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "ScrapeAutomate Documentation",
+  "colors": {
+    "primary": "#1B263B",
+    "light": "#ffffff",
+    "dark": "#1B263B"
+  },
+
+  "favicon": "/icon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Quickstart",
+            "pages": ["introduction", "overview"]
+          },
+
+          {
+            "group": "Features",
+            "pages": [
+              "features/rendering",
+              "features/blocking",
+              "features/output",
+              "features/proxy",
+              "features/workflow"
+            ]
+          },
+          {
+            "group": "References",
+            "pages": ["references/error", "references/history"]
+          },
+          {
+            "group": "Help",
+            "pages": ["help/payment", "help/gloassary"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Endpoint Examples",
+            "pages": [
+              "api-reference/scraper-endpoint",
+              "api-reference/create-workflow",
+              "api-reference/retrive-workflow",
+              "api-reference/get-requests",
+              "api-reference/update-workflow",
+              "api-reference/archive-workflow",
+              "api-reference/unarchive-workflow"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hello@scrapeautomate.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.scrapeautomate.com/builder"
+    }
+  }
+}
